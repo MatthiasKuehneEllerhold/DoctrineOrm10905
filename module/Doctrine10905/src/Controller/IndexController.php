@@ -27,16 +27,19 @@ class IndexController extends AbstractActionController
             $product     = $productRepo->find('teacup');
 
             foreach ($product->getDefaultMachines() as $defaultMachine) {
-                echo $product->getName() . ': ' . $defaultMachine->getMachine()->getName() . '<br/>';
+                printf(
+                    '%s: %s@%s<br/>',
+                    $product->getName(),
+                    $defaultMachine->getProductMachine()->getMachine()->getName(),
+                    $defaultMachine->getLocation()
+                );
             }
         } catch (\Throwable $e) {
             echo $e->getMessage();
         }
 
-
         return [
 
         ];
-
     }
 }

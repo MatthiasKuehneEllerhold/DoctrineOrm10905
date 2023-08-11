@@ -8,9 +8,9 @@ CREATE TABLE `product_available_machine` (`product` VARCHAR(50) NOT NULL, `machi
 ALTER TABLE `product_available_machine` ADD CONSTRAINT `product` FOREIGN KEY (`product`) REFERENCES `product` (`name`);
 ALTER TABLE `product_available_machine` ADD CONSTRAINT `machine` FOREIGN KEY (`machine`) REFERENCES `machine` (`name`);
 
-CREATE TABLE `product_default_machine` (`product` VARCHAR(50) NOT NULL, `location` VARCHAR(50) NOT NULL, `machine` VARCHAR(50) NOT NULL, PRIMARY KEY (`product`, `location`), INDEX `IDX_D50B8B5C1505DF84` (`machine`));
+CREATE TABLE `product_default_machine` (`product` VARCHAR(50) NOT NULL, `location` VARCHAR(50) NOT NULL, `machine` VARCHAR(50) NOT NULL, PRIMARY KEY (`product`, `location`), INDEX `IDX_D50B8B5CD34A04AD` (`product`), INDEX `IDX_D50B8B5CD34A04AD1505DF84` (`product`, `machine`));
 ALTER TABLE `product_default_machine` ADD CONSTRAINT `default_product` FOREIGN KEY (`product`) REFERENCES `product` (`name`);
-ALTER TABLE `product_default_machine` ADD CONSTRAINT `default_machine` FOREIGN KEY (`machine`) REFERENCES `machine` (`name`);
+ALTER TABLE `product_default_machine` ADD CONSTRAINT `default_product_machine` FOREIGN KEY (`product`, `machine`) REFERENCES `product_available_machine` (`product`, `machine`);
 
 INSERT INTO `product` VALUES ('teacup'), ('fork'), ('bottle');
 INSERT INTO `machine` VALUES ('planer'), ('drillpress'), ('injection molder');

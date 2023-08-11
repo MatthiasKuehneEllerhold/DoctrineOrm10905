@@ -4,25 +4,23 @@ declare(strict_types=1);
 
 namespace Ellerhold\Doctrine10905\Database\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Collection;
 
 #[ORM\Table(name: 'product_available_machine')]
 #[ORM\Entity(readOnly: true)]
-#[ORM\Cache(usage: 'READ_ONLY')]
+#[ORM\Cache]
 class ProductMachine
 {
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Product::class, inversedBy: 'machines')]
     #[ORM\JoinColumn(name: 'product', referencedColumnName: 'name', nullable: false)]
-    #[ORM\Cache(usage: 'READ_ONLY')]
+    #[ORM\Cache]
     protected $product;
 
     #[ORM\Id]
     #[ORM\ManyToOne(targetEntity: Machine::class)]
     #[ORM\JoinColumn(name: 'machine', referencedColumnName: 'name', nullable: false)]
-    #[ORM\Cache(usage: 'READ_ONLY')]
+    #[ORM\Cache]
     protected $machine;
 
     public function __construct(Product $product, Machine $machine)
