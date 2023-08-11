@@ -23,17 +23,12 @@ class IndexController extends AbstractActionController
             $em = $this->container->get('doctrine.entitymanager.orm_default');
             /* @var $em \Doctrine\ORM\EntityManager */
 
-            echo __LINE__ . PHP_EOL;
+            $productRepo = $em->getRepository(Product::class);
+            $product     = $productRepo->find('teacup');
 
-            $e1Repo = $em->getRepository(Product::class);
-
-            echo __LINE__ . PHP_EOL;
-
-            $e11 = $e1Repo->find('e11');
-
-            echo __LINE__ . PHP_EOL;
-
-            var_dump($e11 === null);
+            foreach ($product->getDefaultMachines() as $defaultMachine) {
+                echo $product->getName() . ': ' . $defaultMachine->getMachine()->getName() . '<br/>';
+            }
         } catch (\Throwable $e) {
             echo $e->getMessage();
         }

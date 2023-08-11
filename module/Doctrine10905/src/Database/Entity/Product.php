@@ -18,9 +18,11 @@ class Product
     protected string $name;
 
     #[ORM\OneToMany(targetEntity: ProductMachine::class, mappedBy: 'product')]
+    #[ORM\Cache(usage: 'READ_ONLY')]
     protected Collection $machines;
 
     #[ORM\OneToMany(targetEntity: ProductDefaultMachine::class, mappedBy: 'product')]
+    #[ORM\Cache(usage: 'READ_ONLY')]
     protected Collection $defaultMachines;
 
     public function __construct(string $name, array $machines, array $defaultMachines)
@@ -40,6 +42,9 @@ class Product
         return $this->machines->toArray();
     }
 
+    /**
+     * @return ProductDefaultMachine[]
+     */
     public function getDefaultMachines(): array
     {
         return $this->defaultMachines->toArray();
