@@ -47,7 +47,6 @@ class LaminasCacheFactory implements FactoryInterface
         $serializer->getOptions()->setSerializer(JsonSerializer::class);
         $cache->addPlugin($serializer);
 
-        // No conflicts for different portals (and versions)
         $cache->getOptions()->setNamespace($config['namespace']);
 
         return $cache;

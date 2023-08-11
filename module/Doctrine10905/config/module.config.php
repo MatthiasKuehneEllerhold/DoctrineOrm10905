@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping\Driver\AttributeDriver;
 use Doctrine\Persistence\Mapping\Driver\MappingDriverChain;
 use Laminas\Router\Http\Segment;
 use Laminas\Router\Http\TreeRouteStack;
-use Laminas\ServiceManager\Factory\InvokableFactory;
 
 return [
     'controllers'        => [
@@ -52,7 +51,7 @@ return [
             'chain_driver_orm_default' => [
                 'class'   => MappingDriverChain::class,
                 'drivers' => [
-                    __NAMESPACE__ . '\Entity' => 'attr_driver_orm_default',
+                    __NAMESPACE__ . '\Database\Entity' => 'attr_driver_orm_default',
                 ],
             ],
         ],
@@ -68,7 +67,7 @@ return [
     'router'          => [
         'router_class' => TreeRouteStack::class,
         'routes'       => [
-            'job-aendern' => [
+            'index' => [
                 'type'    => Segment::class,
                 'options' => [
                     'route'    => '/',
@@ -88,8 +87,8 @@ return [
     ],
 
     'view_manager'    => [
-        'display_not_found_reason' => false,
-        'display_exceptions'       => false,
+        'display_not_found_reason' => true,
+        'display_exceptions'       => true,
         'doctype'                  => 'HTML5',
         'not_found_template'       => 'error/404',
         'exception_template'       => 'error/index',

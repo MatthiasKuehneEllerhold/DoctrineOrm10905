@@ -1,0 +1,38 @@
+version: '2'
+
+services:
+  php:
+    volumes:
+      - .:/var/www:cached
+
+  db:
+    volumes:
+      - db_volume:/var/lib/mysql:delegated
+      - ./config/docker/create-dbs.sql:/docker-entrypoint-initdb.d/create-dbs.sql:cached
+    ports:
+      - "3306"
+
+  redis:
+    ports:
+      - "6379"
+
+  cli:
+    volumes:
+      - ~/.cache:/root/.cache:cached
+      - ~/.composer:/root/.composer:cached
+      - ~/.npm:/root/.npm:cached
+      - ~/.phive:/root/.phive:cached
+      - ~/.ssh:/root/.ssh:cached
+      - ~/.vault-token:/root/.vault-token:cached
+
+  cli-xdebug:
+    volumes:
+      - ~/.cache:/root/.cache:cached
+      - ~/.composer:/root/.composer:cached
+      - ~/.npm:/root/.npm:cached
+      - ~/.phive:/root/.phive:cached
+      - ~/.ssh:/root/.ssh:cached
+      - ~/.vault-token:/root/.vault-token:cached
+
+volumes:
+  db_volume:

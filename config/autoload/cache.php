@@ -15,5 +15,8 @@ return [
 
         // The port of the redis host, default 6379
         'port' => '6379',
+
+        // Namespace to make it unique
+        'namespace' => 'Ellerhold_Doctrine10905',
     ]
 ];

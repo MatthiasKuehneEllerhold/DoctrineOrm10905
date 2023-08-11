@@ -1,0 +1,41 @@
+{
+    "name": "ellerhold/doctrine-10905-reproducer",
+    "license": "proprietary",
+    "description": "Reproducer for Issue #10905 of doctrine/orm",
+    "type": "project",
+    "require": {
+        "php": ">= 8.2",
+
+        "ext-PDO": "*",
+        "ext-pdo_mysql": "*",
+        "ext-redis": "*",
+
+        "doctrine/doctrine-orm-module": "^6.0",
+        "doctrine/dbal": "^3.2.0",
+        "doctrine/orm": "^2.16",
+
+        "laminas/laminas-cache": "^3.1",
+        "laminas/laminas-cache-storage-adapter-blackhole": "^2.0",
+        "laminas/laminas-cache-storage-adapter-redis": "^2.0",
+        "laminas/laminas-eventmanager": "^3.2",
+        "laminas/laminas-mvc": "^3.1.1",
+        "laminas/laminas-serializer": "^2.9",
+        "laminas/laminas-servicemanager": ">3.11",
+        "laminas/laminas-session": "^2.8.5",
+        "laminas/laminas-view": "^2.10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ellerhold\\Doctrine10905\\": "module/Doctrine10905/src/"
+        }
+    },
+    "config": {
+        "preferred-install": {
+            "*": "dist"
+        },
+        "allow-plugins": {
+            "composer/package-versions-deprecated": true,
+            "laminas/laminas-dependency-plugin": true
+        }
+    }
+}

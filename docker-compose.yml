@@ -1,0 +1,64 @@
+version: '2'
+
+services:
+  webserver:
+    restart:      always
+    image:        dockerhub.ellerhold.de:5000/apache2.4
+    environment:
+      - "APACHE_VHOST_DOCUMENT_ROOT=/var/www/public"
+      - "APACHE_VHOST_INCLUDE=/var/www/config/vhost.conf"
+      - "APACHE_MOD_SECURITY2_MODE=On"
+      - "APACHE_PHP_FPM_XDEBUG_HOST=php-xdebug"
+    volumes_from:
+      - php
+    ports:
+      - "443"
+
+  php:
+    restart:      always
+    image:        dockerhub.ellerhold.de:5000/php8.2-fpm
+    links:
+      - "redis:redis.local"
+      - "db:db.local"
+
+  php-xdebug:
+    restart:      always
+    image:        dockerhub.ellerhold.de:5000/php8.2-fpm-xdebug
+    volumes_from:
+      - php
+    links:
+      - "redis:redis.local"
+      - "db:db.local"
+
+  redis:
+    restart:      always
+    image:        dockerhub.ellerhold.de:5000/redis-cache
+
+  cron:
+    restart:      always
+    image:        dockerhub.ellerhold.de:5000/php8.2-cron
+    volumes_from:
+      - php
+    links:
+      - "redis:redis.local"
+      - "db:db.local"
+
+  db:
+    restart:      always
+    image:        dockerhub.ellerhold.de:5000/mariadb10.5
+
+  cli:
+    image:        dockerhub.ellerhold.de:5000/php8.2-cli
+    volumes_from:
+      - php
+    links:
+      - "redis:redis.local"
+      - "db:db.local"
+
+  cli-xdebug:
+    image:        dockerhub.ellerhold.de:5000/php8.2-cli-xdebug
+    volumes_from:
+      - php
+    links:
+      - "redis:redis.local"
+      - "db:db.local"
