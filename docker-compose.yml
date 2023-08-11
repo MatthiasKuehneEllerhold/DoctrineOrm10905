@@ -7,7 +7,7 @@ services:
     environment:
       - "APACHE_VHOST_DOCUMENT_ROOT=/var/www/public"
       - "APACHE_VHOST_INCLUDE=/var/www/config/vhost.conf"
-      - "APACHE_MOD_SECURITY2_MODE=On"
+      - "APACHE_MOD_SECURITY2_MODE=Off"
       - "APACHE_PHP_FPM_XDEBUG_HOST=php-xdebug"
     volumes_from:
       - php
