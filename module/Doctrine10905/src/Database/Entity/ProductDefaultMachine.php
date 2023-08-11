@@ -22,7 +22,7 @@ class ProductDefaultMachine
     protected string $location;
 
     #[ORM\ManyToOne(targetEntity: ProductMachine::class)]
-    #[ORM\JoinColumn(name: 'product', referencedColumnName: 'product', nullable: false)]
+    #[ORM\JoinColumn(name: 'product2', referencedColumnName: 'product', nullable: false)]
     #[ORM\JoinColumn(name: 'machine', referencedColumnName: 'machine', nullable: false)]
     #[ORM\Cache]
     protected $productMachine;
